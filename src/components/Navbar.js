@@ -3,63 +3,65 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow">
-      <div className="container">
-        <Link className="navbar-brand" to="/">
-          Buy with Koral
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav m-auto mb-2 mb-lg-0" />
-          <li className="nav-item">
-            <Link className="nav-link active" to="/">
-              Home
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <Link class="navbar-brand" href="#">
+        Shopping <br></br>with Koral
+      </Link>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav m-auto">
+          <li class="nav-item active">
+            <Link class="nav-link" to="/">
+              Home <span class="sr-only"></span>
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/about">
-              About Us
+          <li class="nav-item">
+            <Link class="nav-link" href="#">
+              Link
             </Link>
           </li>
-          <li className="nav-item dropdown" />
-          <Link
-            className="nav-link dropdown-toggle"
-            to="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Our Services
-          </Link>
-          <ul className="dropdown-menu">
-            <li>
-              <Link className="dropdown-item" to="/service-one"></Link>Service 1
-            </li>
-            <li>
-              <Link className="dropdown-item" to="/service-one"></Link>Service 2
-            </li>
-            <li>
-              <Link className="dropdown-item" to="/service-one"></Link>Service 3
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/contact">
-                Contact
+          <li class="nav-item dropdown">
+            <Link
+              class="nav-link dropdown-toggle"
+              to="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              popup="true"
+              aria-expanded="false"
+            >
+              Dropdown
+            </Link>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <Link class="dropdown-item" to="#">
+                Action
               </Link>
-            </li>
-            <li />
-          </ul>
-        </div>
+              <Link class="dropdown-item" to="#">
+                Another action
+              </Link>
+              <Link class="dropdown-divider"></Link>
+              <Link class="dropdown-item" to="#">
+                Something else here
+              </Link>
+            </div>
+          </li>
+          <li class="nav-item">
+            <Link class="nav-link disabled" to="#">
+              Disabled
+            </Link>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input
+            class="form-control m-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
       </div>
     </nav>
   );
