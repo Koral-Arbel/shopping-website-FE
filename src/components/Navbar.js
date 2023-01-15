@@ -1,67 +1,52 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// import { useAuth } from "./AuthContext";
+// import sliderImg2 from "../images/slider-img2.jpg";
 
 function Navbar() {
-  return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <Link class="navbar-brand" href="#">
-        Shopping <br></br>with Koral
-      </Link>
+  // const { user, logout } = useAuth();
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav m-auto">
-          <li class="nav-item active">
-            <Link class="nav-link" to="/">
-              Home <span class="sr-only"></span>
+  return (
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <Link className="navbar-brand" to="/">
+        Shop with Koral
+      </Link>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link className="nav-link" to="/order-list">
+              Order List
             </Link>
           </li>
-          <li class="nav-item">
-            <Link class="nav-link" href="#">
-              Link
-            </Link>
-          </li>
-          <li class="nav-item dropdown">
-            <Link
-              class="nav-link dropdown-toggle"
-              to="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              popup="true"
-              aria-expanded="false"
-            >
-              Dropdown
-            </Link>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <Link class="dropdown-item" to="#">
-                Action
-              </Link>
-              <Link class="dropdown-item" to="#">
-                Another action
-              </Link>
-              <Link class="dropdown-divider"></Link>
-              <Link class="dropdown-item" to="#">
-                Something else here
-              </Link>
-            </div>
-          </li>
-          <li class="nav-item">
-            <Link class="nav-link disabled" to="#">
-              Disabled
+          <li className="nav-item">
+            <Link className="nav-link" to="/favorite-items">
+              Favorite Items
             </Link>
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input
-            class="form-control m-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
+        {/* {user ? (
+          <>
+            <span className="navbar-text mr-2">Welcome, {user.username}</span>
+            <button className="btn btn-secondary" onClick={logout}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link className="btn btn-primary" to="/login">
+            Login/Signup
+          </Link>
+        )} */}
       </div>
     </nav>
   );
