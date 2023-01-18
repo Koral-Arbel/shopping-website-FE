@@ -1,17 +1,26 @@
-import React from "react";
-import Slider from "./inc/Slider";
+import React, { useContext, useEffect, useState } from "react";
+import AuthContext, { AuthProvider } from "./context/AuthProvider";
+// import { testAuthenticatedApi } from "../services/api";
 
 function Home() {
+  const authContext = useContext(AuthContext);
+  const [testResponse, setTestResponse] = useState();
+
+  useEffect(() => {
+    if (Object.keys(authContext["auth"]).length > 0) {
+      testAuthenticatedApi({
+        Authorization: "Bearer " + authContext["auth"],
+      }).then((res) => {
+        setTestResponse(res.data.response);
+      });
+    }
+  }, [authContext]);
+
   return (
-    <div>
-      <Slider />
-      <div className="container">
-        <div className="py-4">
-          <h1>Welcome to Shopping Website Online</h1>
-          <button className="btn btn-primary">Click My</button>
-        </div>
-      </div>
-    </div>
+    <>
+      <h1>Home</h1>
+      {Object.keys(authContext["auth"]).length > 0 && <p>{testResponse}</p>}
+    </>
   );
 }
 
