@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext, { AuthProvider } from "./context/AuthProvider";
+import { testAuthenticatedApi } from "../services/api";
 
 function Home() {
   const authContext = useContext(AuthContext);
