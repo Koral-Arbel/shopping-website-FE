@@ -4,7 +4,7 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 function Navbar() {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light py-3">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light py-4">
         <div className="container">
           <Link className="navbar-brand fw-bold fs-4" to="/">
             Shop with Koral
