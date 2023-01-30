@@ -35,7 +35,7 @@ function Home() {
               {Object.keys(authContext["auth"]).length > 0 && (
                 <p>{testResponse}</p>
               )}
-              <p className="card-text lead fs-2">CHECK OUT ALL TEH TRENDS</p>
+              <p className="card-text lead fs-2">ALL THE BEST IN ONE PLACE</p>
             </div>
           </div>
         </div>

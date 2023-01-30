@@ -12,7 +12,7 @@ class Footer extends Component {
       <div>
         <footer className="footer">
           <span className="text-muted">
-            All Rights Reserved 2020 @JavaGuides
+            All rights reserved to Koral Arbel ©
           </span>
         </footer>
       </div>
