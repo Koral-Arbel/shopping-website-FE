@@ -1,93 +1,109 @@
-import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  Fragment,
+  useContext,
+} from "react";
+import classes from "./Login.module.css";
+import { authenticate } from "../../services/api";
+import { Link } from "react-router-dom";
+import AuthContext from "../context/AuthProvider";
+export let usernamelog = null;
 
 function Login() {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [passwordError, setpasswordError] = useState("");
-  const [emailError, setemailError] = useState("");
+  const { setAuth } = useContext(AuthContext);
+  const userRef = useRef();
+  const errRef = useRef();
 
-  const handleValidation = (event) => {
-    let formIsValid = true;
+  const [user, setUser] = useState("");
+  const [pwd, setPwd] = useState("");
 
-    if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
-      formIsValid = false;
-      setemailError("Email Not Valid");
-      return false;
-    } else {
-      setemailError("");
-      formIsValid = true;
-    }
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
 
-    if (!password.match(/^[a-zA-Z]{8,22}$/)) {
-      formIsValid = false;
-      setpasswordError(
-        "Only Letters and length must best min 8 Chracters and Max 22 Chracters",
-      );
-      return false;
-    } else {
-      setpasswordError("");
-      formIsValid = true;
-    }
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
 
-    return formIsValid;
-  };
+  useEffect(() => {
+    setErrMsg("");
+  }, [user, pwd]);
 
-  const loginSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleValidation();
+    try {
+      const userBody = {
+        username: user,
+        password: pwd,
+      };
+      const response = await authenticate(userBody);
+      setSuccess(true);
+      setAuth(response.data.jwt);
+      setUser("");
+      setPwd("");
+    } catch (err) {
+      if (!err.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response.status === 403) {
+        setErrMsg("Incorrect Username Or Password");
+      } else {
+        setErrMsg("Authentication Failed");
+      }
+      errRef.current.focus();
+    }
   };
 
   return (
-    <div className="App">
-      <div className="container">
-        <div className="row d-flex justify-content-center">
-          <div className="col-md-4">
-            <form id="loginform" onSubmit={loginSubmit}>
-              <div className="form-group">
-                <label>Email address</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="EmailInput"
-                  name="EmailInput"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-                <small id="emailHelp" className="text-danger form-text">
-                  {emailError}
-                </small>
-              </div>
-              <div className="form-group">
-                <label>Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Password"
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-                <small id="passworderror" className="text-danger form-text">
-                  {passwordError}
-                </small>
-              </div>
-              <div className="form-group form-check">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="exampleCheck1"
-                />
-                <label className="form-check-label">Check me out</label>
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Fragment>
+      {success ? (
+        <section>
+          <h1>You are logged in!</h1>
+          <br />
+          <p>
+            <Link to={"/"}>Go to Home</Link>
+          </p>
+        </section>
+      ) : (
+        <section>
+          <p ref={errRef} className={errMsg ? classes.error_mes : "offscreen"}>
+            {errMsg}
+          </p>
+          <h1>Sign In</h1>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="userName">User Name:</label>
+            <input
+              type="text"
+              id="username"
+              ref={userRef}
+              autoComplete="off"
+              onChange={(e) => setUser(e.target.value)}
+              value={user}
+              required
+            />
+            <label htmlFor="password">Password:</label>
+            <input
+              type="password"
+              id="password"
+              onChange={(e) => setPwd(e.target.value)}
+              value={pwd}
+              required
+            />
+            <button type="submit" disabled={!user || !pwd}>
+              Sign In
+            </button>
+          </form>
+          <p>
+            Need an Account?
+            <br />
+            <span className="line">
+              <Link to="/signUp">Sign Up</Link>
+            </span>
+          </p>
+        </section>
+      )}
+    </Fragment>
   );
 }
+
 export default Login;
