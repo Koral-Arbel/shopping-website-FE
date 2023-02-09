@@ -1,10 +1,10 @@
 import React, { useState, userEffect } from "react";
 import Login from "./components/registration/Login";
 import { Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-import Navbar from "./components/Navbar";
+import Home from "./components/pages/Home";
+import Navbar from "./components/pages/Navbar";
 import { AuthProvider } from "./components/context/AuthProvider";
-import Footer from "./components/Footer";
+import Footer from "./components/pages/Footer";
 
 function App() {
   const [newOrder, setNewOrder] = useState([]);
