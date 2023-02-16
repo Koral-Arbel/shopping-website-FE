@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderSharpIcon from "@mui/icons-material/FavoriteBorderSharp";
-import { usernamelog } from "./Login";
+import { usernamelog } from "../../registration/Login";
 import { useLocation } from "react-router-dom";
 
 function MediaCard(props) {

@@ -5,6 +5,8 @@ import Home from "./components/pages/Home";
 import Navbar from "./components/pages/Navbar";
 import { AuthProvider } from "./components/context/AuthProvider";
 import Footer from "./components/pages/Footer";
+import Favorite from "./components/pages/Favorite";
+import Card from "./components/registration/shop/Card";
 
 function App() {
   const [newOrder, setNewOrder] = useState([]);
@@ -16,6 +18,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/favorites" element={<Favorite />} />
+          <Route path="/myCard" element={<Card />} />
         </Routes>
         <Footer />
       </AuthProvider>
